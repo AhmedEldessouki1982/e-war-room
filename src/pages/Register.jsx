@@ -23,13 +23,13 @@ function Register() {
   let [catchedError, setCatchedErrors] = React.useState({});
   let handleChange=(e)=>setUserData({...userData, [e.target.name]:e.target.value});
   
-  let createUser = async () => {
+  let createUser = async (event) => {
+    event.preventDefault()
     await axios.post(
       url,userData
     )
     .then (
       res => {
-        console.log(`data exchanged with status code ${res.status}/found ${res.statusText}`);
         toast(`User created and data transfered /server status ${res.statusText}`, toastifyOptions);
       }
     ).catch (
@@ -50,8 +50,8 @@ function Register() {
 
   return (
     <section className='ml-2 pt-5 md:pt-5 pb-24 md:mx-auto w-full md:w-7/12 overflow-hidden'>
-    {/*render the tostify container */}
-      <ToastContainer />
+        {/*render the tostify container */}
+        <ToastContainer />
         <Nav />
         <div className='flex flex-col justify-center items-center m-10 md:mx-auto md:w-1/2'>
           <h4 className='uppercase text-sm md:text-2xl'>Register here</h4>

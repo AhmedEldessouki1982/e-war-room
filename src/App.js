@@ -1,9 +1,9 @@
-import Login from '../src/pages/Login';
+import Participants from '../src/pages/Participants';
 
 function App() {
   return (
     <div className="app">
-     <Login />
+     <Participants />
     </div>
   );
 }

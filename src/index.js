@@ -8,12 +8,24 @@ import { createBrowserRouter, RouterProvider, Navigate} from "react-router-dom";
 import Register from './pages/Register';
 import Login from './pages/Login';
 import LoginContext from './context/LoginContext';
+import {LoginUser} from './context/LoginContext'; 
+//importing axios
+import axios from 'axios';
+import {isUserAthu as url} from './utils/api.js'
 
-//user confirmation logic
-let protectedUser = 1; //temp varuable to test the user security
 
+// user confirmation logic
+
+
+// let protectedUser;
 let ProtectedRoute = ({children}) => {
-  if (!protectedUser) {
+
+
+
+  // let { loginState } =  React.useContext(LoginUser);
+  // loginState.email !== "" ? protectedUser = true : protectedUser = false;
+
+  if (0) {
     return (
       <Navigate to="/login"/>
     )
@@ -27,7 +39,7 @@ let ProtectedRoute = ({children}) => {
 const appRouter = createBrowserRouter ([
   {
     path: "/",
-    element: <ProtectedRoute > <App /> </ProtectedRoute>
+    element: <ProtectedRoute><App /></ProtectedRoute>
   },
   {
     path: "/login",

@@ -3,7 +3,9 @@ import React from 'react';
 
 export const LoginUser = React.createContext();
 let initLoginState = {
-    
+    userName: "",
+    email: "",
+    isAuthorized: false
 }
 
 let reducer = (loginState, action) => {
@@ -11,11 +13,14 @@ let reducer = (loginState, action) => {
        
         case "LOGIN_SUCCESS":
             return {
-                       
+                userName: action.username,
+                email: action.email,      
+                isAuthorized: true,                            
             }
         case "LOGIN_FAIL":
             return {
-                
+                ...loginState,
+                isAuthorized: false,              
             }
           
         default:

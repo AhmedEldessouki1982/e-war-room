@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from '../components/Nav';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { LoginAPI as url } from '../utils/api';
 import {LoginUser} from '../context/LoginContext'; 
 import axios from 'axios';
@@ -20,10 +20,9 @@ let toastifyOptions = {
   theme: "light",
 }
 
-
-
 function Login() {
-  let {loginState, dispatch} =  React.useContext(LoginUser);
+
+  let { loginState, dispatch } =  React.useContext(LoginUser);
   let [userData, setUserData] = React.useState({});
   let handleChange = (e) => setUserData({...userData, [e.target.name]:e.target.value });
 
@@ -32,12 +31,13 @@ function Login() {
     await axios.post (
       url,userData
     ).then(
-      res => console.log(res.data)
+      res => dispatch({type: "LOGIN_SUCCESS", email: res.data.email,username: res.data.username,})
     ).catch (
-      res => toast(res.response.data.msg, toastifyOptions)
-      
+      res => {
+        toast(res.response.data.msg, toastifyOptions);
+        dispatch({type: "LOGIN_FAIL"});
+      }
     )
-    
   }
 
   return (
@@ -55,9 +55,14 @@ function Login() {
               New Register
             </Link>
           </p>
-          <button className='uppercase w-48 h-12 border-2 border-red outline-none text-red text-center' onClick={loginUser}>login</button>
+          <button className='uppercase w-48 h-12 border-2 border-red outline-none text-red text-center' onClick={loginUser}>login
+            {
+              loginState.isAuthorized && <Navigate to="/"/>
+            }
+          </button>
           <button className='uppercase mt-10 w-48 h-12 border-2 border-yellow-300 outline-none text-red text-center'>login with google</button>
         </div>
+
     </section>
   )
 }

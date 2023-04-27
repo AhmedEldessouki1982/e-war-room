@@ -1,9 +1,12 @@
-import Participants from '../src/pages/Participants';
+import ProtectRoutes from './hooks/ProtectedRoutes';
+import Layout from './pages/Layout';
 
 function App() {
   return (
     <div className="app">
-     <Participants />
+     <ProtectRoutes> 
+      <Layout /> 
+     </ProtectRoutes>
     </div>
   );
 }

@@ -1,10 +1,13 @@
 //avatar to be used
 import React from 'react';
-import {LoginUser} from '../context/LoginContext'; 
+import { useAuth } from '../hooks/useAuth';
+
 
 
 function Participants() {
-  let { loginState } =  React.useContext(LoginUser);
+    let { logout } = useAuth();
+
+
 
   
   return (
@@ -15,9 +18,11 @@ function Participants() {
       <div className='h-full flex-2 bg-slate-100'>
         <h1 className='text-red text-4xl text-center'>Participants</h1>
         <ul>
-          <li className='text-black'>{loginState.userName}</li>
+          <li className='text-black'>{"test"}</li>
         </ul>
       </div>
+
+      <button onClick={logout}>logout</button>
     </section>
   )
 }
